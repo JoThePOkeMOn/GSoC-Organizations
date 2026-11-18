@@ -630,6 +630,26 @@ const manualRepositories = {
     organizationProfile: 'https://github.com/fossi-foundation',
     source: 'manual',
   },
+  preCICE: {
+    repositories: [
+      {
+        label: 'Official repositories',
+        url: 'https://github.com/precice',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-18',
+      },
+      {
+        label: 'preCICE library repository',
+        url: 'https://github.com/precice/precice',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-18',
+      },
+    ],
+    organizationProfile: 'https://github.com/precice',
+    source: 'manual',
+  },
 };
 
 class UnionFind {
