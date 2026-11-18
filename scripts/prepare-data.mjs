@@ -355,6 +355,61 @@ const manualRepositories = {
     organizationProfile: 'https://github.com/ceph',
     source: 'manual',
   },
+  DBpedia: {
+    repositories: [
+      {
+        label: 'DBpedia repositories',
+        url: 'https://github.com/dbpedia',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-14',
+      },
+      {
+        label: 'DBpedia Extraction Framework',
+        url: 'https://github.com/dbpedia/extraction-framework',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-14',
+      },
+      {
+        label: 'DBpedia Databus',
+        url: 'https://github.com/dbpedia/databus',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-14',
+      },
+      {
+        label: 'DBpedia Neural Extraction Framework',
+        url: 'https://github.com/dbpedia/neural-extraction-framework',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-14',
+      },
+      {
+        label: 'DBpedia tools',
+        url: 'https://github.com/dbpedia/dbpedia',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-14',
+      },
+      {
+        label: 'DBpedia Links',
+        url: 'https://github.com/dbpedia/links',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-14',
+      },
+      {
+        label: 'DBpedia Temporal Knowledge Graph',
+        url: 'https://github.com/dbpedia/dbpedia-temporal',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-14',
+      },
+    ],
+    organizationProfile: 'https://github.com/dbpedia',
+    source: 'manual',
+  },
   'Fedora Project': {
     repositories: [
       {
