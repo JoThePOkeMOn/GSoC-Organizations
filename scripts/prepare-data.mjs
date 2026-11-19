@@ -688,7 +688,7 @@ const manualRepositories = {
   preCICE: {
     repositories: [
       {
-        label: 'Official repositories',
+        label: 'preCICE repositories',
         url: 'https://github.com/precice',
         host: 'GitHub',
         verified: true,
