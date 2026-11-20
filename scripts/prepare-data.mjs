@@ -296,6 +296,19 @@ const manualRepositories = {
     organizationProfile: 'https://github.com/gnss-sdr',
     source: 'manual',
   },
+  'ReactOS Foundation': {
+    repositories: [
+      {
+        label: 'ReactOS source repository',
+        url: 'https://github.com/reactos/reactos',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-19',
+      },
+    ],
+    organizationProfile: 'https://github.com/reactos',
+    source: 'manual',
+  },
   'Genes, Genomes and Variation': {
     repositories: [
       {
@@ -703,6 +716,17 @@ const manualRepositories = {
       },
     ],
     organizationProfile: 'https://github.com/precice',
+  'Distributed and Unified Numerics Environment (DUNE)': {
+    repositories: [
+      {
+        label: 'DUNE official repositories',
+        url: 'https://gitlab.dune-project.org/core',
+        host: 'GitLab',
+        verified: true,
+        lastChecked: '2026-11-19',
+      },
+    ],
+    organizationProfile: 'https://gitlab.dune-project.org/core',
     source: 'manual',
   },
 };
