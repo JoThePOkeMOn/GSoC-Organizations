@@ -296,6 +296,19 @@ const manualRepositories = {
     organizationProfile: 'https://github.com/gnss-sdr',
     source: 'manual',
   },
+  ScummVM: {
+    repositories: [
+      {
+        label: 'ScummVM source repository',
+        url: 'https://github.com/scummvm/scummvm',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-20',
+      },
+    ],
+    organizationProfile: 'https://github.com/scummvm',
+    source: 'manual',
+  },
   'ReactOS Foundation': {
     repositories: [
       {
