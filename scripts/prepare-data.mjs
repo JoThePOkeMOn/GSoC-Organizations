@@ -716,6 +716,8 @@ const manualRepositories = {
       },
     ],
     organizationProfile: 'https://github.com/precice',
+    source: 'manual',
+  },
   'Distributed and Unified Numerics Environment (DUNE)': {
     repositories: [
       {
