@@ -322,6 +322,19 @@ const manualRepositories = {
     organizationProfile: 'https://github.com/reactos',
     source: 'manual',
   },
+  Scilab: {
+    repositories: [
+      {
+        label: 'Scilab source repository',
+        url: 'https://gitlab.com/scilab/scilab',
+        host: 'GitLab',
+        verified: true,
+        lastChecked: '2026-11-20',
+      },
+    ],
+    organizationProfile: 'https://gitlab.com/scilab',
+    source: 'manual',
+  },
   'Genes, Genomes and Variation': {
     repositories: [
       {
@@ -696,6 +709,27 @@ const manualRepositories = {
       },
     ],
     organizationProfile: 'https://github.com/discourse',
+    source: 'manual',
+  },
+
+  'GNOME Foundation': {
+    repositories: [
+      {
+        label: 'GNOME repositories',
+        url: 'https://gitlab.gnome.org/GNOME',
+        host: 'Self-hosted Git',
+        verified: true,
+        lastChecked: '2026-11-15',
+      },
+      {
+        label: 'GitHub read-only mirror',
+        url: 'https://github.com/GNOME',
+        host: 'GitHub',
+        verified: true,
+        lastChecked: '2026-11-15',
+      },
+    ],
+    organizationProfile: 'https://gitlab.gnome.org/GNOME',
     source: 'manual',
   },
   'Free and Open Source Silicon Foundation': {
