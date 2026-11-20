@@ -1201,9 +1201,17 @@
     "source": "manual"
   },
   "ScummVM": {
-    "repositories": [],
-    "organizationProfile": "https://www.google.com/search?q=ScummVM%20source%20code%20repository",
-    "source": "search"
+    "repositories": [
+      {
+        "label": "ScummVM source repository",
+        "url": "https://github.com/scummvm/scummvm",
+        "host": "GitHub",
+        "verified": true,
+        "lastChecked": "2026-11-20"
+      }
+    ],
+    "organizationProfile": "https://github.com/scummvm",
+    "source": "manual"
   },
   "Shogun": {
     "repositories": [],
