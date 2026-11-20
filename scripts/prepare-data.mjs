@@ -309,6 +309,19 @@ const manualRepositories = {
     organizationProfile: 'https://github.com/reactos',
     source: 'manual',
   },
+  Scilab: {
+    repositories: [
+      {
+        label: 'Scilab source repository',
+        url: 'https://gitlab.com/scilab/scilab',
+        host: 'GitLab',
+        verified: true,
+        lastChecked: '2026-11-20',
+      },
+    ],
+    organizationProfile: 'https://gitlab.com/scilab',
+    source: 'manual',
+  },
   'Genes, Genomes and Variation': {
     repositories: [
       {
