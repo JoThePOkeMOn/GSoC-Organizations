@@ -335,19 +335,6 @@ const manualRepositories = {
     organizationProfile: 'https://gitlab.com/scilab',
     source: 'manual',
   },
-  'LLVM Compiler Infrastructure': {
-    repositories: [
-      {
-        label: 'LLVM source repository',
-        url: 'https://github.com/llvm/llvm-project',
-        host: 'GitHub',
-        verified: true,
-        lastChecked: '2026-11-20',
-      },
-    ],
-    organizationProfile: 'https://github.com/llvm',
-    source: 'manual',
-  },
   'Genes, Genomes and Variation': {
     repositories: [
       {
