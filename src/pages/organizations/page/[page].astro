@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Explorer from '../../../components/Explorer';
+import organizationsData from '../../../data/organizations.json';
+import { ORGANIZATIONS_PER_BATCH } from '../../../lib/directory-pagination';
+import type { Organization, OrganizationSummary } from '../../../types';
+
+export function getStaticPaths() {
+  const pageCount = Math.ceil(
+    organizationsData.length / ORGANIZATIONS_PER_BATCH,
+  );
+  return Array.from({ length: pageCount - 1 }, (_, index) => ({
+    params: { page: String(index + 2) },
+    props: { page: index + 2, pageCount },
+  }));
+}
+
+interface Props {
+  page: number;
+  pageCount: number;
+}
+
+const { page, pageCount } = Astro.props;
+const organizations = organizationsData as Organization[];
+const summaries: OrganizationSummary[] = organizations.map(
+  ({ participations, communityLinks, ...organization }) => organization,
+);
+const first = (page - 1) * ORGANIZATIONS_PER_BATCH + 1;
+const last = Math.min(page * ORGANIZATIONS_PER_BATCH, organizations.length);
+---
+
+<BaseLayout
+  title={`GSoC Organizations | Page ${page} of ${pageCount}`}
+  description={`Browse organizations ${first}–${last} of ${organizations.length} in the Google Summer of Code directory. Compare technologies, participation history, and archived projects.`}
+  pageType="CollectionPage"
+>
+  <Explorer organizations={summaries} initialPage={page} client:load />
+</BaseLayout>

@@ -7,6 +7,10 @@ import {
 } from '../lib/filter';
 import { parseFilterState, serializeFilterState } from '../lib/url-state';
 import type { FilterState, OrganizationSummary } from '../types';
+import {
+  directoryPageUrl,
+  ORGANIZATIONS_PER_BATCH,
+} from '../lib/directory-pagination';
 import ContributionAnnouncement from './ContributionAnnouncement';
 import FilterSidebar from './FilterSidebar';
 import GitHubStarButton from './GitHubStarButton';
@@ -14,7 +18,6 @@ import OrganizationCard from './OrganizationCard';
 import SortControl from './SortControl';
 
 const BOOKMARKS_KEY = 'gsoc-explorer-bookmarks-v1';
-const ORGANIZATIONS_PER_BATCH = 48;
 
 function counts(values: string[][]) {
   const result = new Map<string, number>();
@@ -28,9 +31,11 @@ function counts(values: string[][]) {
 export default function Explorer({
   organizations,
   shortlistOnly = false,
+  initialPage = 1,
 }: {
   organizations: OrganizationSummary[];
   shortlistOnly?: boolean;
+  initialPage?: number;
 }) {
   const [state, setState] = useState<FilterState>(defaultFilters);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
@@ -154,6 +159,14 @@ export default function Explorer({
   }
 
   const filterCount = activeFilterCount(state);
+  const isDirectoryPage =
+    !shortlistOnly && filterCount === 0 && state.sort === 'recent';
+  const pageStart = isDirectoryPage
+    ? (initialPage - 1) * ORGANIZATIONS_PER_BATCH
+    : 0;
+  const visibleEnd = Math.min(pageStart + visibleLimit, results.length);
+  const hasMore = visibleEnd < results.length;
+  const nextPage = Math.floor(visibleEnd / ORGANIZATIONS_PER_BATCH) + 1;
 
   return (
     <div
@@ -316,31 +329,69 @@ export default function Explorer({
           {results.length ? (
             <>
               <div className="organization-grid">
-                {results.slice(0, visibleLimit).map((organization, index) => (
-                  <OrganizationCard
-                    key={organization.slug}
-                    organization={organization}
-                    bookmarked={bookmarks.includes(organization.slug)}
-                    priority={index < 8}
-                    onBookmark={toggleBookmark}
-                  />
-                ))}
+                {results
+                  .slice(pageStart, visibleEnd)
+                  .map((organization, index) => (
+                    <OrganizationCard
+                      key={organization.slug}
+                      organization={organization}
+                      bookmarked={bookmarks.includes(organization.slug)}
+                      priority={index < 8}
+                      onBookmark={toggleBookmark}
+                    />
+                  ))}
               </div>
-              {results.length > visibleLimit && (
+              {(hasMore || pageStart > 0) && (
                 <div className="load-more-row">
-                  <button
-                    className="button secondary-button"
-                    type="button"
-                    onClick={() =>
-                      setVisibleLimit(
-                        (limit) => limit + ORGANIZATIONS_PER_BATCH,
-                      )
-                    }
-                  >
-                    Load more organizations
-                  </button>
+                  {pageStart > 0 && (
+                    <a
+                      className="button secondary-button"
+                      href={directoryPageUrl(initialPage - 1)}
+                      rel="prev"
+                    >
+                      Previous page
+                    </a>
+                  )}
+                  {hasMore &&
+                    (isDirectoryPage ? (
+                      <a
+                        className="button secondary-button"
+                        href={directoryPageUrl(nextPage)}
+                        rel="next"
+                        data-load-more
+                        onClick={(event) => {
+                          if (
+                            event.button !== 0 ||
+                            event.metaKey ||
+                            event.ctrlKey ||
+                            event.shiftKey ||
+                            event.altKey
+                          )
+                            return;
+                          event.preventDefault();
+                          setVisibleLimit(
+                            (limit) => limit + ORGANIZATIONS_PER_BATCH,
+                          );
+                        }}
+                      >
+                        Load more organizations
+                      </a>
+                    ) : (
+                      <button
+                        className="button secondary-button"
+                        type="button"
+                        onClick={() =>
+                          setVisibleLimit(
+                            (limit) => limit + ORGANIZATIONS_PER_BATCH,
+                          )
+                        }
+                      >
+                        Load more organizations
+                      </button>
+                    ))}
                   <span>
-                    Showing {visibleLimit.toLocaleString()} of{' '}
+                    Showing {pageStart > 0 && `${pageStart + 1}–`}
+                    {visibleEnd.toLocaleString()} of{' '}
                     {results.length.toLocaleString()}
                   </span>
                 </div>

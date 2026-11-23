@@ -6,6 +6,10 @@ import {
   buildYearHubs,
 } from '../lib/hubs';
 import type { Organization } from '../types';
+import {
+  directoryPageUrl,
+  ORGANIZATIONS_PER_BATCH,
+} from '../lib/directory-pagination';
 
 export const prerender = true;
 
@@ -27,6 +31,10 @@ export const GET: APIRoute = ({ site }) => {
   const firstTimeHub = buildFirstTimeHub(organizations);
   const paths = [
     '/',
+    ...Array.from(
+      { length: Math.ceil(organizations.length / ORGANIZATIONS_PER_BATCH) - 1 },
+      (_, index) => directoryPageUrl(index + 2),
+    ),
     '/about/',
     '/years/',
     '/technologies/',

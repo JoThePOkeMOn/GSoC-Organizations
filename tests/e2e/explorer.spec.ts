@@ -425,7 +425,7 @@ test('directory reveals organizations in complete four-card rows', async ({
   );
   await expect(page.getByRole('article')).toHaveCount(48);
   await expect(page.getByText('Showing 48 of 519')).toBeVisible();
-  await page.getByRole('button', { name: 'Load more organizations' }).click();
+  await page.getByRole('link', { name: 'Load more organizations' }).click();
   await expect(page.getByRole('article')).toHaveCount(96);
   await expect(page.getByText('Showing 96 of 519')).toBeVisible();
 });
@@ -564,8 +564,8 @@ test('organization profiles preserve contributor and archive details', async ({
     hero.getByRole('link', { name: 'Official website' }),
   ).toBeVisible();
   await expect(
-    hero.getByRole('link', { name: 'Find repository' }),
-  ).toBeVisible();
+    hero.getByRole('link', { name: 'Repository', exact: true }),
+  ).toHaveAttribute('href', 'https://github.com/JMUWRobotics/3DTK');
   await expect(
     page.getByRole('heading', { name: 'Source repositories' }),
   ).toHaveCount(0);
@@ -856,7 +856,7 @@ test('directory footer follows the load-more row without a blank gap', async ({
     'data-ready',
     'true',
   );
-  await page.getByRole('button', { name: 'Load more organizations' }).click();
+  await page.getByRole('link', { name: 'Load more organizations' }).click();
   await expect(page.getByText('Showing 96 of 519')).toBeVisible();
 
   const verticalGap = await page.evaluate(() => {

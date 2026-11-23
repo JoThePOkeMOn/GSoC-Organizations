@@ -25,6 +25,8 @@ const siteUrl = new URL('/', Astro.site ?? 'https://gsocorganizations.xyz');
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 const socialImageUrl = new URL(image, siteUrl);
 const isHomePage = canonicalUrl.pathname === '/';
+const isDirectoryPage =
+  isHomePage || /^\/organizations\/page\/\d+\/$/.test(canonicalUrl.pathname);
 const additionalStructuredData = Array.isArray(structuredData)
   ? structuredData
   : [structuredData];
@@ -136,7 +138,7 @@ const jsonLd = {
       document.documentElement.classList.add('js');
     </script>
   </head>
-  <body class:list={{ 'directory-page': isHomePage }}>
+  <body class:list={{ 'directory-page': isDirectoryPage }}>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="site-loading" role="status" aria-live="polite">
       <div class="site-loading-mark" aria-hidden="true">
@@ -294,6 +296,7 @@ const jsonLd = {
 
         const isExplorerPage =
           window.location.pathname === '/' ||
+          /^\/organizations\/page\/\d+\/$/.test(window.location.pathname) ||
           window.location.pathname === '/shortlist/';
         readinessTimer = window.setTimeout(markReady, 8000);
 
@@ -334,6 +337,15 @@ const jsonLd = {
               !link ||
               link.target === '_blank' ||
               link.hasAttribute('download')
+            ) {
+              return;
+            }
+
+            if (
+              link.hasAttribute('data-load-more') &&
+              document.querySelector(
+                '[data-testid="explorer"][data-ready="true"]',
+              )
             ) {
               return;
             }
